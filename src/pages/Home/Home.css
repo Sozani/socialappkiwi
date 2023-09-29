@@ -1,0 +1,7 @@
+.Home {
+  position: relative;
+  padding: 0.5rem 1rem;
+  display: grid;
+  grid-template-columns: 18rem auto 20rem;
+  gap: 1 rem;
+}

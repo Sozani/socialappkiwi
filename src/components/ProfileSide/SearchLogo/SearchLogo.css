@@ -1,0 +1,47 @@
+/* SearchLogo.css */
+.searchLogo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+
+  /* Optional padding around the entire component */
+}
+.search {
+  display: flex;
+  gap: 0, 5rem;
+  background-color: var(--green);
+}
+
+.logo {
+  width: 70px;
+  height: 70px; /* Adjust the margin between the logo and search input */
+}
+
+.search {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.search > input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.s-icon {
+  margin-left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--green);
+  padding: 5px;
+  border-radius: 4px;
+
+  cursor: pointer;
+}
+.s-icon:hover {
+  color: #fff;
+}

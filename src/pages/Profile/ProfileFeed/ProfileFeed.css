@@ -1,0 +1,10 @@
+.ProfileFeed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  text-align: center;
+  max-height: 120vh;
+
+  overflow: auto;
+}

@@ -1,0 +1,13 @@
+.ChatIcons {
+  display: flex;
+  padding: 1rem;
+  gap: 2rem;
+}
+.ChatIcons svg {
+  font-size: 22px;
+  margin: 0 0.5rem;
+}
+.ChatIcons svg:hover {
+  color: var(--green);
+  cursor: pointer;
+}

@@ -1,0 +1,11 @@
+.Posts {
+  /* background-color: var(--white); */
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 1rem;
+  width: 95%;
+  padding: 0.75rem;
+  border-radius: var(--borderRadius);
+  margin: 1rem auto;
+}

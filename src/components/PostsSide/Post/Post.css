@@ -1,0 +1,29 @@
+.Post {
+  background-color: var(--white);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  border-radius: var(--borderRadius);
+  color: var(--lightblack);
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 3rem;
+  padding-top: 10px;
+  padding-bottom: 1rem;
+}
+.Post > img {
+  width: 90%;
+  max-height: 20rem;
+
+  border-radius: var(--borderRadius);
+  padding-top: 1rem;
+  /* margin: auto; */
+}
+.postReact {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-start;
+}
+.postReact > svg:first-child {
+  color: rgb(246, 48, 48);
+}
