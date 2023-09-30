@@ -9,6 +9,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 dotenv.config();
 //Usage of Routes
+//use /auth to go and read what in AuthRoute file after localhost:9000/auth/
 app.use("/auth", AuthRoute);
 
 mongoose
