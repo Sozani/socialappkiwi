@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import AuthRoute from "./Routes/AuthRoute.js";
+import UserRoute from "./Routes/UserRoute.js";
 const app = express();
 
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -11,6 +12,7 @@ dotenv.config();
 //Usage of Routes
 //use /auth to go and read what in AuthRoute file after localhost:9000/auth/
 app.use("/auth", AuthRoute);
+app.use("/user", UserRoute);
 
 mongoose
   .connect(
