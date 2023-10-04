@@ -33,8 +33,8 @@ export const getUser = async (req, res) => {
 export const updateUser = async (req, res) => {
   const id = req.params.id;
 
-  const { _id, isAdmin, password } = req.body;
-  if (id === _id || isAdmin) {
+  const { _id, currentUserAdminStatus, password } = req.body;
+  if (id === _id || currentUserAdminStatus) {
     try {
       if (password) {
         const salt = await bcrypt.genSalt(10);
@@ -71,5 +71,53 @@ export const deleteUser = async (req, res) => {
     }
   } else {
     res.status(403).json("Access Denied! you can only delete your own profile");
+  }
+};
+//Follow a user
+export const followUser = async (req, res) => {
+  //id of the someone we want to follow him
+  const id = req.params.id;
+  //id of the user who want to follow someone
+  const { _id } = req.body;
+  console.log(id, _id);
+  if (_id === id) {
+    //prevent him from follow him self
+    res.status(403).json("Action forbiden");
+  } else {
+    try {
+      const followUser = await UserModel.findById(id);
+      const followingUser = await UserModel.findById(_id);
+      if (!followUser.followers.includes(_id)) {
+        await followUser.updateOne({ $push: { followers: _id } });
+        await followingUser.updateOne({ $push: { following: id } });
+        res.status(200).json("User followed!");
+      } else {
+        res.status(403).json("User is Already followed by you");
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
+};
+//Unfollow a user
+export const unFollowUser = async (req, res) => {
+  const id = req.params.id;
+  const { _id } = req.body;
+  if (_id === id) {
+    res.status(403).json("Action forbidden");
+  } else {
+    try {
+      const unFollowUser = await UserModel.findById(id);
+      const unFollowingUser = await UserModel.findById(_id);
+      if (unFollowUser.followers.includes(_id)) {
+        await unFollowUser.updateOne({ $pull: { followers: _id } });
+        await unFollowingUser.updateOne({ $pull: { following: id } });
+        res.status(200).json("Unfollowed Successfully!");
+      } else {
+        res.status(403).json("You are not following this User");
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
   }
 };
