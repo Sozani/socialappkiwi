@@ -8,8 +8,20 @@
   padding: 0 !important;
   /* width: 100%; */
   background-color: rgb(169, 255, 226);
+  position: relative;
   transition: 1s;
 }
+.authLogo {
+  position: absolute;
+  top: -150px;
+  left: 70px;
+}
+.authLogo img {
+  width: 600px;
+  height: 600px;
+  filter: blur(1px);
+}
+
 .AuthContainer {
   position: relative;
   display: flex;

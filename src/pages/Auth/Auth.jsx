@@ -1,5 +1,6 @@
 import React from "react";
 import "./Auth.css";
+import Logo from "../../images/logo.png";
 import { useState } from "react";
 const Auth = () => {
   const [isButton1Clicked, setIsButton1Clicked] = useState(false);
@@ -21,6 +22,9 @@ const Auth = () => {
 
   return (
     <div className="Auth">
+      <div className="authLogo">
+        <img src={Logo} className="logo" alt="" />
+      </div>
       <div className="AuthContainer">
         <div className="box signin">
           <h2>Already have an account ?</h2>

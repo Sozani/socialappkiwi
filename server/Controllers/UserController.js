@@ -73,23 +73,66 @@ export const deleteUser = async (req, res) => {
     res.status(403).json("Access Denied! you can only delete your own profile");
   }
 };
-//Follow a user
+// Follow a user
+// export const followUser = async (req, res) => {
+//   //id of the someone we want to follow him
+//   const id = req.params.id;
+//   //id of the user who want to follow someone
+//   const { currentUserId } = req.body;
+//   console.log(id, currentUserId);
+//   if (currentUserId === id) {
+//     //prevent him from follow him self
+//     res.status(403).json("Action forbiden");
+//   } else {
+//     try {
+//       const followUser = await UserModel.findById(id);
+//       const followingUser = await UserModel.findById(currentUserId);
+//       if (!followUser.followers.includes(currentUserId)) {
+//         await followUser.updateOne({ $push: { followers: currentUserId } });
+//         await followingUser.updateOne({ $push: { following: id } });
+//         res.status(200).json("User followed!");
+//       } else {
+//         res.status(403).json("User is Already followed by you");
+//       }
+//     } catch (error) {
+//       console.error(error);
+//       res.status(500).json(error);
+//     }
+//   }
+// };
 export const followUser = async (req, res) => {
-  //id of the someone we want to follow him
   const id = req.params.id;
-  //id of the user who want to follow someone
   const { currentUserId } = req.body;
-  console.log(id, currentUserId);
+
   if (currentUserId === id) {
-    //prevent him from follow him self
-    res.status(403).json("Action forbiden");
+    res.status(403).json("Action forbidden");
   } else {
     try {
       const followUser = await UserModel.findById(id);
+      if (!followUser) {
+        res.status(404).json("User not found");
+        return;
+      }
+
       const followingUser = await UserModel.findById(currentUserId);
-      if (!followUser.followers.includes(currentUserId)) {
-        await followUser.updateOne({ $push: { followers: currentUserId } });
-        await followingUser.updateOne({ $push: { following: id } });
+
+      // Ensure followers array is initialized
+      followUser.followers = followUser.followers || [];
+      console.log("followUser:", followUser);
+      console.log("currentUserId:", currentUserId);
+      if (
+        followUser &&
+        followUser.followers &&
+        !followUser.followers.includes(currentUserId)
+      ) {
+        followUser.followers.push(currentUserId);
+        await followUser.save();
+
+        // Ensure following array is initialized
+        followingUser.following = followingUser.following || [];
+        followingUser.following.push(id);
+        await followingUser.save();
+
         res.status(200).json("User followed!");
       } else {
         res.status(403).json("User is Already followed by you");
@@ -100,6 +143,7 @@ export const followUser = async (req, res) => {
     }
   }
 };
+
 //Unfollow a user
 export const unFollowUser = async (req, res) => {
   const id = req.params.id;
