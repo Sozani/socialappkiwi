@@ -4,7 +4,15 @@ import Logo from "../../images/logo.png";
 import { useState } from "react";
 const Auth = () => {
   const [isButton1Clicked, setIsButton1Clicked] = useState(false);
-
+  const [data, setData] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmpass: "",
+  });
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
   const toggleBodyClass = () => {
     setIsButton1Clicked((prevIsButton1Clicked) => {
       // Toggle the class based on the previous state value
@@ -42,8 +50,18 @@ const Auth = () => {
           <div className="form signinForm">
             <form>
               <h3>Sign In</h3>
-              <input type="text" placeholder="USERNAME" />
-              <input type="password" placeholder="PASSWORD" />
+              <input
+                type="text"
+                name="username"
+                onChange={handleChange}
+                placeholder="USERNAME"
+              />
+              <input
+                type="password"
+                name="password"
+                onChange={handleChange}
+                placeholder="PASSWORD"
+              />
               <input type="submit" value="login" />
               <a href="#" className="forget">
                 Forget Password
@@ -53,10 +71,30 @@ const Auth = () => {
           <div className="form signupForm">
             <form>
               <h3>Sign Up</h3>
-              <input type="text" placeholder="USERNAME" />
-              <input type="text" placeholder="Email address" />
-              <input type="password" placeholder="PASSWORD" />
-              <input type="text" placeholder="Confrim Password" />
+              <input
+                type="text"
+                name="username"
+                onChange={handleChange}
+                placeholder="USERNAME"
+              />
+              <input
+                type="text"
+                name="email"
+                onChange={handleChange}
+                placeholder="Email address"
+              />
+              <input
+                type="password"
+                name="password"
+                onChange={handleChange}
+                placeholder="PASSWORD"
+              />
+              <input
+                type="password"
+                name="confrimpass"
+                placeholder="Confrim Password"
+                onChange={handleChange}
+              />
               <input type="submit" value="Register" />
             </form>
           </div>
