@@ -10,6 +10,7 @@ const Auth = () => {
     password: "",
     confirmpass: "",
   });
+  const [confrimPass, setConfrimPass] = useState(false);
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
@@ -95,6 +96,17 @@ const Auth = () => {
                 placeholder="Confrim Password"
                 onChange={handleChange}
               />
+              {/* check if password and confrim password is the same or not */}
+              <span
+                style={{
+                  display: confrimPass ? "none" : "block",
+                  color: "red",
+                  fontSize: "12px",
+                  marginBottom: "7px",
+                }}
+              >
+                *Confrime password is not same
+              </span>
               <input type="submit" value="Register" />
             </form>
           </div>
