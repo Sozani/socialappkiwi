@@ -10,10 +10,24 @@ const Auth = () => {
     password: "",
     confirmpass: "",
   });
-  const [confrimPass, setConfrimPass] = useState(false);
+  const [confrimPass, setConfrimPass] = useState(true);
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
+  const resetForm = () => {
+    setConfrimPass(true);
+    setData({ username: "", email: "", password: "", confirmpass: "" });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (data.password !== data.confirmpass) {
+      setConfrimPass(false);
+    } else {
+      // Reset the form values
+      resetForm();
+    }
+  };
+
   const toggleBodyClass = () => {
     setIsButton1Clicked((prevIsButton1Clicked) => {
       // Toggle the class based on the previous state value
@@ -70,31 +84,35 @@ const Auth = () => {
             </form>
           </div>
           <div className="form signupForm">
-            <form>
+            <form onSubmit={handleSubmit}>
               <h3>Sign Up</h3>
               <input
                 type="text"
                 name="username"
                 onChange={handleChange}
                 placeholder="USERNAME"
+                value={data.username}
               />
               <input
                 type="text"
                 name="email"
                 onChange={handleChange}
                 placeholder="Email address"
+                value={data.email}
               />
               <input
                 type="password"
                 name="password"
                 onChange={handleChange}
                 placeholder="PASSWORD"
+                value={data.password}
               />
               <input
                 type="password"
-                name="confrimpass"
+                name="confirmpass"
                 placeholder="Confrim Password"
                 onChange={handleChange}
+                value={data.confirmpass}
               />
               {/* check if password and confrim password is the same or not */}
               <span
