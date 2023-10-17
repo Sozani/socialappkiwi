@@ -18,7 +18,7 @@ const Auth = () => {
     setConfrimPass(true);
     setData({ username: "", email: "", password: "", confirmpass: "" });
   };
-  const handleSubmit = (e) => {
+  const handleSignupSubmit = (e) => {
     e.preventDefault();
     if (data.password !== data.confirmpass) {
       setConfrimPass(false);
@@ -26,6 +26,10 @@ const Auth = () => {
       // Reset the form values
       resetForm();
     }
+  };
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    resetForm();
   };
 
   const toggleBodyClass = () => {
@@ -63,19 +67,21 @@ const Auth = () => {
         </div>
         <div className="formBox">
           <div className="form signinForm">
-            <form>
+            <form onSubmit={handleLoginSubmit}>
               <h3>Sign In</h3>
               <input
                 type="text"
                 name="username"
                 onChange={handleChange}
                 placeholder="USERNAME"
+                value={data.username}
               />
               <input
                 type="password"
                 name="password"
                 onChange={handleChange}
                 placeholder="PASSWORD"
+                value={data.password}
               />
               <input type="submit" value="login" />
               <a href="#" className="forget">
@@ -84,7 +90,7 @@ const Auth = () => {
             </form>
           </div>
           <div className="form signupForm">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSignupSubmit}>
               <h3>Sign Up</h3>
               <input
                 type="text"

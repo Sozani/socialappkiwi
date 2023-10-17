@@ -19,7 +19,7 @@
 .authLogo img {
   width: 600px;
   height: 600px;
-  filter: blur(1px);
+  /* filter: blur(1px); */
 }
 
 .AuthContainer {
