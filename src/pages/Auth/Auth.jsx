@@ -2,31 +2,44 @@ import React from "react";
 import "./Auth.css";
 import Logo from "../../images/logo.png";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 const Auth = () => {
   const [isButton1Clicked, setIsButton1Clicked] = useState(false);
+  const dispatch = useDispatch();
   const [data, setData] = useState({
     username: "",
     email: "",
     password: "",
     confirmpass: "",
   });
-  const [confrimPass, setConfrimPass] = useState(true);
+  const [confrimPass, setConfirmPass] = useState(true);
+  //handle change save values in devtools
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
+  //reset form
   const resetForm = () => {
-    setConfrimPass(true);
+    setConfirmPass(true);
     setData({ username: "", email: "", password: "", confirmpass: "" });
   };
+  //sign up submit
   const handleSignupSubmit = (e) => {
     e.preventDefault();
-    if (data.password !== data.confirmpass) {
-      setConfrimPass(false);
-    } else {
-      // Reset the form values
+    // if (data.password !== data.confirmpass) {
+    //   setConfrimPass(false);
+    // } else {
+    //   // Reset the form values
+    //   resetForm();
+    // }
+    if (data.password === data.confirmpass) {
+      dispatch(signUp(data)); // Dispatch signUp action if passwords match
       resetForm();
+    } else {
+      setConfirmPass(false); // Set Confirm Password error state if passwords do not match
+      dispatch(logIn(data)); // Dispatch logIn action (or any other action) if passwords do not match
     }
   };
+  //login submit
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     resetForm();
