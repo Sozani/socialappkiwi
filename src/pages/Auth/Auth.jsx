@@ -3,6 +3,8 @@ import "./Auth.css";
 import Logo from "../../images/logo.png";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { logIn, signUp } from "../../actions/AuthAction";
+
 const Auth = () => {
   const [isButton1Clicked, setIsButton1Clicked] = useState(false);
   const dispatch = useDispatch();
