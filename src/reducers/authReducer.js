@@ -17,3 +17,4 @@ const authReducer = (
       return { ...state, loading: false, error: true };
   }
 };
+export default authReducer;
