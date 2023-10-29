@@ -15,6 +15,8 @@ const authReducer = (
       return { ...state, authData: action.data, loading: false, error: false };
     case "AUTH_FAIL":
       return { ...state, loading: false, error: true };
+    default:
+      return state;
   }
 };
 export default authReducer;
