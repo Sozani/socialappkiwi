@@ -1,5 +1,6 @@
 import UserModel from "../Models/userModel.js";
 import bcrypt from "bcrypt";
+//register user
 export const registerUser = async (req, res) => {
   const { username, lastname, password, firstname } = req.body;
   const salt = await bcrypt.genSalt(10);

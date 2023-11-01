@@ -2,12 +2,17 @@ import React from "react";
 import "./Auth.css";
 import Logo from "../../images/logo.png";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logIn, signUp } from "../../actions/AuthAction";
+import authReducer from "../../reducers/authReducer";
 
 const Auth = () => {
   const [isButton1Clicked, setIsButton1Clicked] = useState(false);
   const dispatch = useDispatch();
+  //I'm not use this yet
+  const loading = useSelector((state) => state.authReducer.loading);
+  console.log(loading);
+  //OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
   const [data, setData] = useState({
     username: "",
     email: "",
@@ -43,6 +48,7 @@ const Auth = () => {
   };
   //login submit
   const handleLoginSubmit = (e) => {
+    dispatch(logIn(data)); // Dispatch logIn action
     e.preventDefault();
     resetForm();
   };
