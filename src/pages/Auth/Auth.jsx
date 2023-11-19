@@ -4,7 +4,7 @@ import Logo from "../../images/logo.png";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logIn, signUp } from "../../actions/AuthAction";
-import authReducer from "../../reducers/authReducer";
+// import authReducer from "../../reducers/authReducer";
 
 const Auth = () => {
   const [isButton1Clicked, setIsButton1Clicked] = useState(false);

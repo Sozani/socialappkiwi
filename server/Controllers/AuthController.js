@@ -2,19 +2,21 @@ import UserModel from "../Models/userModel.js";
 import bcrypt from "bcrypt";
 //register user
 export const registerUser = async (req, res) => {
-  const { username, lastname, password, firstname } = req.body;
   const salt = await bcrypt.genSalt(10);
-  const hashPass = await bcrypt.hash(password, salt);
+  const hashedPass = await bcrypt.hash(req.body.password, salt);
+  req.body.password = hashedPass;
 
   //now be sure this data correct with userModel
-  const newUser = new UserModel({
-    username,
-    lastname,
-    password: hashPass,
-    firstname,
-  });
+  const newUser = new UserModel(req.body);
+  const { username } = req.body;
   //Now save the new user and send response or catch error
   try {
+    const oldUser = await UserModel.findOne({ username });
+    if (oldUser) {
+      return res
+        .status(400)
+        .json({ message: "username is already registered!" });
+    }
     const user = await newUser.save();
     res.status(200).json({ user });
   } catch (error) {
